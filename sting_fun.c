@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
-  * string_fun - function that handles %s
+  * string_func - function that handles %s
   * @str: the string
   * Return: return count
   */
