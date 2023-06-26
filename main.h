@@ -1,5 +1,5 @@
-#ifndef MAIN_H_
-#define MAIN_H_
+#ifndef MAIN_H
+#define MAIN_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,10 +8,7 @@
 
 int _printf(const char *format, ...);
 int _putchar(char c);
-int handle_directive(char directive, va_list args, int *count);
-int print_string_arg(va_list args);
-int print_binary_arg(va_list args);
-int print_integer_arg(va_list args);
-int print_decimal_arg(va_list args);
-
-#endif /* MAIN_H_ */
+void int_fun(int n);
+int string_func(char *str);
+void special_chr(char c);
+#endif
