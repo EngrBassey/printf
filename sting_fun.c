@@ -31,4 +31,3 @@ int string_func(char *str)
 
 	return (count);
 }
-

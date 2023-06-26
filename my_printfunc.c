@@ -47,7 +47,7 @@ int _printf(const char *format, ...)
 		count += 1;
 		i++;
 	}
-return (count);
+	return (count);
 }
 
 /**
