@@ -8,6 +8,10 @@
 
 int _printf(const char *format, ...);
 int _putchar(char c);
+int handle_directive(char directive, va_list args, int *count);
 int print_string_arg(va_list args);
+int print_binary_arg(va_list args);
+int print_integer_arg(va_list args);
+int print_decimal_arg(va_list args);
 
 #endif /* MAIN_H_ */
