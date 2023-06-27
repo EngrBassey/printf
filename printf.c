@@ -8,66 +8,113 @@
 */
 
 int _printf(const char *format, ...)
-{
-va_list args;
-int count = 0;
+{	va_list args;
+	int count = 0;
 
-va_start(args, format);
-while (*format)
-{
-if (*format == '%')
-{
-format++;
-if (*format == '%')
-{
-write(1, "%", 1);
-count++;
+	va_start(args, format);
+	while (*format)
+	{
+		if (*format == '%')
+		{	format++;
+			if (*format == '%')
+			{	write(1, "%", 1);
+				count++;
+			}
+			else if (*format == 'c')
+			{
+				_putchar(va_arg(args, int));
+				count++;
+			}
+			else if (*format == 's')
+			{
+				count += print_string_arg(args);
+			}
+			else if (*format == 'd' || *format == 'i')
+			{
+				int_fun(va_arg(args, int));
+				count++;
+			}
+			else
+			{
+				special_chr(*format);
+				count += 2;
+			}
+		}
+		else
+		{
+			write(1, format, 1);
+			count++;
+		}
+	format++;
+	}
+	va_end(args);
+	return (count);
 }
-else if (*format == 'c')
-{
-int ch = va_arg(args, int);
-write(1, &ch, 1);
-count++;
-}
-else if (*format == 's')
-{
-count += print_string_arg(args);
-}
-else
-{
-write(1, "%", 1);
-write(1, format, 1);
-count += 2;
-}
-}
-else
-{
-write(1, format, 1);
-count++;
-}
-format++;
-}
-va_end(args);
-return (count);
-}
-
 /**
- * print_string_arg - prints a string argument
- * @args: variable argument list
- *
+ * print_string_arg - prints a string argumentint count = 0
+ * @args: variable argument lisT
  * Return: the number of characters printed
  */
 int print_string_arg(va_list args)
 {
-char *str = va_arg(args, char *);
-int count = 0;
-int i = 0;
+	char *str = va_arg(args, char *);
+	int count = 0;
+	int i = 0;
 
-while (str[i])
-{
-write(1, &str[i], 1);
-count++;
-i++;
+	if (str)
+	{
+		while (str[i])
+		{
+			write(1, &str[i], 1);
+			count++;
+			i++;
+		}
+	}
+	else
+	{
+		_putchar('N');
+		_putchar('U');
+		_putchar('L');
+		_putchar('L');
+
+		count = 4;
+	}
+
+	return (count);
 }
-return (count);
+
+/**
+  * special_chr - function that prints unspecifed format
+  * @c: character
+  */
+
+void special_chr(const char c)
+{
+	_putchar('%');
+	_putchar(c);
+}
+
+/**
+  * int_fun - function that checks for %i and %d
+  * @num: the number
+  */
+
+void int_fun(int num)
+{
+	int n;
+
+	if (num == 0)
+	{
+		return;
+	}
+	if (num < 0)
+	{
+		_putchar('-');
+		num = -num;
+	}
+
+	n = num / 10;
+	int_fun(n);
+
+	_putchar(num % 10 + '0');
 }
