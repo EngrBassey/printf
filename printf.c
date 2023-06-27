@@ -59,15 +59,15 @@ int print_string_arg(va_list args)
 {
 	char *str = va_arg(args, char *);
 	int count = 0;
-	int i = 0;
+	int j = 0;
 
 	if (str)
 	{
-		while (str[i])
+		while (str[j])
 		{
-			write(1, &str[i], 1);
+			write(1, &str[j], 1);
 			count++;
-			i++;
+			j++;
 		}
 	}
 	else
