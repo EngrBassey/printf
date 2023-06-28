@@ -11,15 +11,15 @@
 
 int _printf(const char *format, ...);
 int _putchar(char c);
-void special_chr(const char c);
 int handle_directive(char directive, va_list args, int *count);
 int handle_binary_arg(va_list args);
 int print_binary_arg(va_list args);
-int print_string_arg(va_list args);
 int print_integer_arg(va_list args);
 int print_decimal_arg(va_list args);
 int power_of_ten(int exponent);
-void int_fun(int num);
-void print_integer(int num);
+int print_integer(int num);
+int handle_format(const char *format, va_list args, int count);
+int print_string(char *str);
+int print_integer(int num);
 
 #endif /* MAIN_H_ */
