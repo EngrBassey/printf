@@ -1,70 +1,41 @@
 #include "main.h"
-
 /**
- * print_string - Print a null-terminated string
- * @str: The string to print
- *
- * Return: The number of characters printed
- */
-int print_string(char *str)
-{
-int count = 0;
-int i = 0;
-
-while (str[i] != '\0')
-{
-count += write(STDOUT_FILENO, &str[i], 1);
-i++;
-}
-
-return (count);
-}
-
-/**
- * _printf - Custom printf implementation
- * @format: Format string
- *
- * Return: Number of characters printed (excluding the null byte)
+ * _printf - do what a printf function do
+ * @format: a format specifiers passed to this function
+ * Return: an index value
  */
 int _printf(const char *format, ...)
 {
-va_list args;
-int count = 0;
+	const char *f_specifiers[] = {"%c", "%s", "%%", "%d", "%i", "%o", "%b"};
+	int (*conversion_f[])(va_list) = {c_char, stringFun, percent,
+		integer, integer, _printf_o, binar_num};
+	va_list args;
+	int f_index = 0, _size_f, length = 0, after_perc = 0, is_match = 0;
 
-va_start(args, format);
-
-while (*format != '\0')
-{
-if (*format == '%')
-{
-format++;
-switch (*format)
-{
-case 'c':
-{
-int ch = va_arg(args, int);
-count += write(STDOUT_FILENO, &ch, 1);
-break;
-}
-case 's':
-count += print_string(va_arg(args, char *));
-break;
-case '%':
-count += write(STDOUT_FILENO, "%", 1);
-break;
-default:
-count += write(STDOUT_FILENO, "%", 1);
-count += write(STDOUT_FILENO, format, 1);
-break;
-}
-}
-else
-{
-count += write(STDOUT_FILENO, format, 1);
-}
-
-format++;
-}
-va_end(args);
-return (count);
+	va_start(args, format);
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+		return (-1);
+	while (format[f_index] != '\0')
+	{
+		_size_f = (sizeof(f_specifiers) / sizeof(f_specifiers[0])) - 1;
+		is_match = 0;
+		while (_size_f >= 0)
+		{after_perc = 0;
+			while (f_specifiers[_size_f][after_perc] != '\0' &&
+			f_specifiers[_size_f][after_perc] == format[f_index + after_perc])
+			{after_perc++; }
+			if (f_specifiers[_size_f][after_perc] == '\0')
+			{length += conversion_f[_size_f](args);
+				f_index += after_perc;
+				is_match = 1;
+				break; }
+			_size_f--;
+		}
+		if (!is_match)
+		{_putchar(format[f_index]);
+			length++;
+			f_index++; }
+	}
+	va_end(args);
+	return (length);
 }
