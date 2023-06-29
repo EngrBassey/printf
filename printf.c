@@ -37,9 +37,7 @@ while (*format != '\0')
 {
 if (*format == '%')
 {
-	return (-1);
 format++;
-
 switch (*format)
 {
 case 'c':
