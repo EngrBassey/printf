@@ -35,6 +35,47 @@ int unsigned_num(va_list num)
 }
 
 /**
+ * hex_num - function handles %x and %X.
+ * @num: the number
+ * Return: return counter
+ */
+
+int hex_num(va_list num)
+{
+	int count = 0, i = 0, j;
+
+	unsigned int value = va_arg(num, unsigned int);
+	unsigned int temp = value;
+	int *hexDig;
+
+	while (value / 16 != 0)
+	{
+		value /= 16;
+	count++;
+	}
+
+	hexDig = (int *)malloc(count * sizeof(int));
+
+	while (i < count)
+	{
+		hexDig[i] = temp % 16;
+		temp /= 16;
+	i++;
+	}
+
+	for (j = count - 1; j >= 0; j--)
+	{
+		if (hexDig[j] > 9)
+			hexDig[j] = hexDig[j] + 7;
+		_putchar(hexDig[j] + '0');
+	}
+
+	free(hexDig);
+
+	return (count);
+}
+
+/**
  * octal_num - octal function handler
  * @num: the octal num
  * Return: return Count

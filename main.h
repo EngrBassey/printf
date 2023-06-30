@@ -28,5 +28,6 @@ int binar_num(va_list b);
 int fun_num(int x);
 int octal_num(va_list num);
 int unsigned_num(va_list num);
+int hex_num(va_list num);
 
 #endif
