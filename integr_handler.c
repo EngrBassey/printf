@@ -63,10 +63,6 @@ int integer(va_list num)
 	int value = va_arg(num, int);
 	int count = 0;
 
-	if (value == 0)
-	{
-		return(0);
-	}
 	if (value < 0)
 	{
 		_putchar('-');
@@ -77,7 +73,8 @@ int integer(va_list num)
 	{
 		count += fun_num(value / 10);
 	}
-	_putchar((value % 10) + '0');
-	count++;
+	else 
+		_putchar((value % 10) + '0');
+		count++;
 	return (count);
 }
