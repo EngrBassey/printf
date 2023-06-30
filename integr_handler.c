@@ -2,31 +2,32 @@
 /**
  * octal_num - octal function handler
  * @num: the octal num
- * Return: return count
+ * Return: return octalCount
  */
 int octal_num(va_list num)
 {
 
-	int count = 0, i, digits[12];
+	int octalCount = 0, i, octalDigits[12];
 	unsigned int value;
+	int count = 0;
 
 	value = va_arg(num, unsigned int);
 
 	if (value == 0)
 	{
-		_putchar('0');
-		return (1);
+		octalDigits[0] = 0;
+		octalCount = 1;
 	}
 	while (value != 0)
 	{
-		digits[count] = value % 8;
+		octalDigits[octalCount] = value % 8;
 		value = value / 8;
-		count++;
+		octalCount++;
 	}
 
-	for (i = count - 1; i >= 0; i--)
+	for (i = octalCount - 1; i >= 0; i--)
 	{
-		_putchar(digits[i] + '0');
+		count += _putchar(octalDigits[i] + '0');
 	}
 	return (count);
 }
