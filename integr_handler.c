@@ -73,7 +73,7 @@ int integer(va_list num)
 	{
 		count += fun_num(value / 10);
 	}
-	else 
+	else
 		_putchar((value % 10) + '0');
 		count++;
 	return (count);
