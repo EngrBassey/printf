@@ -3,23 +3,30 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <stdarg.h>
-#include <limits.h>
-#include <stdbool.h>
+#include <unistd.h>
+#include <stddef.h>
 
+/** creating macros **/
+#define UNUSED(y) (void)(y)
+#define binary_size 32
+#define octal_size 12
 
 int _printf(const char *format, ...);
-int _putchar(char c);
-int handle_directive(char directive, va_list args, int *count);
-int handle_binary_arg(va_list args);
-int print_binary_arg(va_list args);
-int print_integer_arg(va_list args);
-int print_decimal_arg(va_list args);
-int power_of_ten(int exponent);
-int print_integer(int num);
-int handle_format(const char *format, va_list args, int count);
-int print_string(char *str);
-int print_integer(int num);
 
-#endif /* MAIN_H_ */
+/** string function, char and lenght function proto **/
+int _strlen(char *str);
+int stringFun(va_list str);
+int revstring(va_list str);
+int c_char(va_list c);
+int percent(va_list pr);
+int _putchar(char c);
+
+/** integer function, binary func, unsigned, octal*/
+int integer(va_list num);
+int binar_num(va_list b);
+int fun_num(int x);
+int octal_num(va_list num);
+int unsigned_num(va_list num);
+
+#endif
