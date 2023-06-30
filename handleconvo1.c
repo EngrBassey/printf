@@ -1,41 +1,19 @@
 #include "main.h"
 
 /**
- * print_integer - Print an integer
- * @num: The integer to print
+ * print_binary - Print an unsigned integer in binary format
+ * @num: The unsigned integer to print
  *
  * Return: The number of characters printed
  */
-int print_integer(int num)
+int print_binary(unsigned int num)
 {
-int count = 0;
+if (num / 2)
+print_binary(num / 2);
 
-if (num < 0)
-{
-count += _putchar('-');
-num = -num;
-}
+print_binary('0' + num % 2);
 
-int temp = num;
-int digits = 0;
-do {
-temp /= 10;
-digits++;
-} while (temp != 0);
-
-while (digits > 0)
-{
-int divisor = 1;
-for (int i = 1; i < digits; i++)
-divisor *= 10;
-
-int digit = num / divisor;
-count += _putchar('0' + digit);
-num %= divisor;
-digits--;
-}
-
-return (count);
+return (0);
 }
 
 /**
@@ -53,7 +31,7 @@ switch (*format)
 case 'c':
 {
 int ch = va_arg(args, int);
-count += putchar(ch);
+count += print_binary(ch);
 break;
 }
 case 's':
@@ -66,12 +44,18 @@ int num = va_arg(args, int);
 count += print_integer(num);
 break;
 }
+case 'b':
+{
+unsigned int num = va_arg(args, unsigned int);
+count += print_binary(num);
+break;
+}
 case '%':
-count += putchar('%');
+count += print_binary('%');
 break;
 default:
-count += putchar('%');
-count += putchar(*format);
+count += print_binary('%');
+count += print_binary(*format);
 break;
 }
 
