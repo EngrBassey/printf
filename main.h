@@ -22,10 +22,11 @@ int c_char(va_list c);
 int percent(va_list pr);
 int _putchar(char c);
 
-/** integer function, binary func, */
+/** integer function, binary func, unsigned, octal*/
 int integer(va_list num);
 int binar_num(va_list b);
 int fun_num(int x);
 int octal_num(va_list num);
+int unsigned_num(va_list num);
 
 #endif

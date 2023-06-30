@@ -1,8 +1,43 @@
 #include "main.h"
+
+/**
+ * unsigned_num - octal function handler
+ * @num: the octal num
+ * Return: return Count
+ */
+
+int unsigned_num(va_list num)
+{
+
+	int unsCount = 0, i, unsDigits[12];
+	unsigned int value;
+	int count = 0;
+
+	value = va_arg(num, unsigned int);
+
+	if (value == 0)
+	{
+		unsDigits[0] = 0;
+		unsCount = 1;
+	}
+	while (value != 0)
+	{
+		unsDigits[unsCount] = value % 10;
+		value = value / 10;
+		unsCount++;
+	}
+
+	for (i = unsCount - 1; i >= 0; i--)
+	{
+		count += _putchar(unsDigits[i] + '0');
+	}
+	return (count);
+}
+
 /**
  * octal_num - octal function handler
  * @num: the octal num
- * Return: return octalCount
+ * Return: return Count
  */
 int octal_num(va_list num)
 {

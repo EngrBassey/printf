@@ -8,16 +8,16 @@
 
 int _printf(const char *format, ...)
 {
-	const char *var_spec[] = {"%c", "%s", "%%", "%d", "%i", "%o", "%b"};
+	/* ARRAY OF SPECIFIERS and thier FUNCTIONS*/
+	const char *var_spec[] = {"%c", "%s", "%%", "%d", "%i", "%o", "%b",
+		"%u"};
 	int (*var_name[])(va_list) = {c_char, stringFun, percent,
-		integer, integer, octal_num, binar_num
-	};
+		integer, integer, octal_num, binar_num, unsigned_num};
 
 	va_list printf;
 	int i = 0, count = 0, j = 0, value = 0, buffer;
 
 	va_start(printf, format);
-
 	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
 	while (format[i] != '\0')
