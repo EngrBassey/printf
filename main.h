@@ -26,6 +26,6 @@ int _putchar(char c);
 int integer(va_list num);
 int binar_num(va_list b);
 int fun_num(int x);
-int _printf_o(va_list arg);
+int octal_num(va_list num);
 
 #endif

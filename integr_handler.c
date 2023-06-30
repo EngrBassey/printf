@@ -1,31 +1,34 @@
 #include "main.h"
 /**
- * _printf_o - octal
- * @arg: arg list
- * Return: number digits
+ * octal_num - octal function handler
+ * @num: the octal num
+ * Return: return count
  */
-int _printf_o(va_list arg)
+int octal_num(va_list num)
 {
-	unsigned int numb;
-	int c = 0, k, result[12];
 
-	numb = va_arg(arg, unsigned int);
-	if (numb == 0)
+	int count = 0, i, digits[12];
+	unsigned int value;
+
+	value = va_arg(num, unsigned int);
+
+	if (value == 0)
 	{
 		_putchar('0');
 		return (1);
 	}
-	while (numb != 0)
+	while (value != 0)
 	{
-		result[c] = numb % 8;
-		numb /= 8;
-		c++;
+		digits[count] = value % 8;
+		value = value / 8;
+		count++;
 	}
-	for (k = c - 1; k >= 0; k--)
+
+	for (i = count - 1; i >= 0; i--)
 	{
-		_putchar(result[k] + '0');
+		_putchar(digits[i] + '0');
 	}
-	return (c);
+	return (count);
 }
 
 /**
@@ -57,18 +60,18 @@ int fun_num(int x)
 
 int integer(va_list num)
 {
-	int num_d = va_arg(num, int);
+	int value = va_arg(num, int);
 	int count = 0;
 
-	if (num_d < 0)
+	if (value < 0)
 	{
 		_putchar('-');
-		num_d = -num_d;
+		value = -value;
 		count++;
 	}
-	if (num_d / 10)
-		count += fun_num(num_d / 10);
-	_putchar((num_d % 10) + '0');
+	if (value / 10)
+		count += fun_num(value / 10);
+	_putchar((value % 10) + '0');
 	count++;
 	return (count);
 }

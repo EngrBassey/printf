@@ -1,41 +1,51 @@
 #include "main.h"
+
 /**
- * _printf - do what a printf function do
- * @format: a format specifiers passed to this function
- * Return: an index value
+ * _printf - custom printf function
+ * @format: different specifiers
+ * Return: return count
  */
+
 int _printf(const char *format, ...)
 {
-	const char *f_specifiers[] = {"%c", "%s", "%%", "%d", "%i", "%o", "%b"};
-	int (*conversion_f[])(va_list) = {c_char, stringFun, percent,
-		integer, integer, _printf_o, binar_num};
-	va_list args;
-	int f_index = 0, _size_f, length = 0, after_perc = 0, is_match = 0;
+	const char *var_spec[] = {"%c", "%s", "%%", "%d", "%i", "%o", "%b"};
+	int (*var_name[])(va_list) = {c_char, stringFun, percent,
+		integer, integer, octal_num, binar_num
+	};
 
-	va_start(args, format);
-	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+	va_list printf;
+	int i = 0, count = 0, j = 0, value = 0, buffer;
+
+	va_start(printf, format);
+
+	if ((format[0] == '%' && format[1] == '\0') || format == NULL)
 		return (-1);
-	while (format[f_index] != '\0')
+	while (format[i] != '\0')
 	{
-		_size_f = (sizeof(f_specifiers) / sizeof(f_specifiers[0])) - 1;
-		is_match = 0;
-		while (_size_f >= 0)
-		{after_perc = 0;
-			while (f_specifiers[_size_f][after_perc] != '\0' &&
-			f_specifiers[_size_f][after_perc] == format[f_index + after_perc])
-			{after_perc++; }
-			if (f_specifiers[_size_f][after_perc] == '\0')
-			{length += conversion_f[_size_f](args);
-				f_index += after_perc;
-				is_match = 1;
-				break; }
-			_size_f--;
+		buffer = (sizeof(var_spec) / sizeof(var_spec[0])) - 1;
+		value = 0;
+		while (buffer >= 0)
+		{
+			j = 0;
+			while (var_spec[buffer][j] != '\0' &&
+			var_spec[buffer][j] == format[i + j])
+			{j++; }
+			if (var_spec[buffer][j] == '\0')
+			{
+				count += var_name[buffer](printf);
+				i += j;
+				value = 1;
+				break;
+			}
+			buffer--;
 		}
-		if (!is_match)
-		{_putchar(format[f_index]);
-			length++;
-			f_index++; }
+		if (!value)
+		{
+			_putchar(format[i]);
+			count++;
+			i++;
+		}
 	}
-	va_end(args);
-	return (length);
+	va_end(printf);
+	return (count);
 }
