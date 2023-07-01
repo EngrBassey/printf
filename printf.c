@@ -10,10 +10,10 @@ int _printf(const char *format, ...)
 {
 	/* ARRAY OF SPECIFIERS and thier FUNCTIONS*/
 	const char *var_spec[] = {"%c", "%s", "%%", "%d", "%i", "%o", "%b",
-		"%u", "%X", "%x", "%S"};
+		"%u", "%X", "%x", "%S", "%p"};
 	int (*var_name[])(va_list) = {c_char, stringFun, percent,
 		integer, integer, octal_num, binar_num, unsigned_num,
-	hex_num, hex_num, s_char};
+	hex_num, hex_num, s_char, address};
 	va_list printf;
 	int i = 0, count = 0, j = 0, value = 0, buffer;
 
