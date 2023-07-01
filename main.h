@@ -21,6 +21,7 @@ int revstring(va_list str);
 int c_char(va_list c);
 int percent(va_list pr);
 int _putchar(char c);
+int s_char(va_list string);
 
 /** integer function, binary func, unsigned, octal*/
 int integer(va_list num);
