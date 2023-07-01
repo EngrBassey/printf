@@ -27,7 +27,7 @@ int stringFun(va_list str)
 
 	ptr = va_arg(str, char*);
 
-	if (str == NULL || ptr == NULL)
+	if (str = NULL || ptr == NULL)
 	{
 		ptr = "(null)";
 	}
